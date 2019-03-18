@@ -1,0 +1,356 @@
+<html lang="ja"><head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#c90000">
+<meta name="apple-mobile-web-app-title" content="PaintsChainer">
+<meta name="application-name" content="PaintsChainer">
+<link rel="apple-touch-icon" sizes="57x57" href="/images/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/images/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/images/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/images/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/images/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/images/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/images/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/images/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-icon-180x180.png"> 
+<link rel="icon" type="image/png" sizes="192x192" href="/images/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/images/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/images/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+<link rel="alternate" hreflang="ja" href="/index_ja.html">
+<link rel="alternate" hreflang="zh" href="/index_zh.html">
+<link rel="alternate" hreflang="en" href="/index_en.html">
+<title>Cloth Classifier -衣物自动识别-</title>
+<!-- Canvas toBlob polyfill -->
+<script async="" src="//static.ads-twitter.com/uwt.js"></script><script async="" src="//static.ads-twitter.com/uwt.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/javascript-canvas-to-blob/3.8.0/js/canvas-to-blob.min.js"></script>
+<!-- jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<!-- jQuery Cookie -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<!-- jQuery UI -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<!-- bootstrap -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- font-awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+<!-- Mobile detect -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/mobile-detect/1.3.6/mobile-detect.min.js"></script>
+<!-- main -->
+<link rel="stylesheet" href="css/paints_chainer.css?v=1540873098">
+<script src="https://cdn.ravenjs.com/3.19.1/raven.min.js" crossorigin="anonymous"></script>
+<script type="text/javascript">
+  window.i18n_locales = {"warn_too_large_filesize":"画像ファイルのサイズが大きすぎます。","tanpopo":"たんぽぽ","satsuki":"さつき","canna":"かんな","panda":"パンダ","shirokuma":"しろくま","paint":"着色","share":"シェア","download":"ダウンロード","upload_other":"別の画像をアップロード","edit_color":"着色","edit_line":"線画編集","line_simplify":"ペン入れ","auto_paint":"自動プレビュー","preset_image_title":"pixiv Sketch・Pawoo「AI三姉妹イラスト企画」大賞作品","preset_image_title_2":"pixiv Sketch・Pawoo「絵愛ちえなちゃんイラスト企画」大賞作品","preset_image_title_3":"「PaintsChainer1周年記念イラストコンテスト」最優秀賞作品","preset_image_1":"提供：おがたさん","preset_image_2":"提供：ももさん","preset_image_3":"提供：ももさん","preset_image_4":"提供：ももさん","preset_image_5":"提供：でろりさん","preset_image_6":"提供：いもむしさん"}
+</script>
+<!-- <script src="js/paints_chainer.js?v=1540873098"></script> -->
+<script src="js/c-c.js"></script>
+<script src="js/echarts.js"></script>
+<link rel="stylesheet" href="css/classify.css">
+
+
+    <link rel="stylesheet" href="css/index.css?v=1540873098">
+  </head>
+  <body id="colorize-page">
+    <nav id="top-nav" class="navbar navbar-default">
+  <div class="nav-container container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+      </button>
+      <div class="logo">
+        <a href="index_ja.html">
+          <img src="images/design-v2/logo.png" width="138" height="32">
+        </a>
+      </div>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+          <span class="handle upload-button">
+            <img src="images/design-v2/upload.svg">
+            上传图片
+          </span>
+        </li>
+        <li>
+          <span class="handle preset-button">
+            <img src="images/design-v2/brush.svg">
+            使用样例
+          </span>
+        </li>
+        <li>
+          <a class="handle" href="/webui/howto/">
+            <img src="images/design-v2/info-q.svg">
+            使用方法
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div id="main-container">
+  <div id="app" class="">
+    <div class="app_root__container--3Jk6i">
+      <div class="paint_app__container--3I1yU" style="display: flex;">
+        <div class="hint_section__container--2l8G7 common_section__containerBase--qmkKj">
+          <div class="common_section__header--5dJef">
+            <div class="common_section__modeSelector--5wKVd">
+              <button class="common_section__hintButtonActive--2m-Kb common_section__modeButtonActive--1oHGA common_toolbox__activedButton--285Ls common__normalButton--2nl55" style="width: 70px; height: 32px;">
+                <img src="images/design-v2/brush_white.svg">
+                <span>分类</span>
+              </button>
+              <button class="common_section__lineButton--1HVZz common_section__modeButton--3_uuQ common__normalButton--2nl55 button_not_finish" style="width: 90px; height: 32px;">
+                <img src="images/design-v2/pencil.svg">
+                <span>检测</span>
+              </button>
+            </div>
+            <div class="hint_section__spacer--1K27V"></div>
+          </div>
+          <div class="hint_workspace__container--2XbJC">
+            <div class="hint_toolbox__toolbox--JV0ia">
+              <div>
+                <div class="common_toolbox__undoBox--1xCez">
+                  <button class="common_toolbox__toolIconDisable--13YCr common_toolbox__toolIcon--1ZLHr" style="width: 28px; height: 28px;">
+                    <img src="images/design-v2/hint_undo.svg">
+                  </button>
+                  <button class="common_toolbox__toolIconDisable--13YCr common_toolbox__toolIcon--1ZLHr" style="width: 28px; height: 28px;">
+                    <img src="images/design-v2/hint_redo.svg">
+                  </button>
+                </div>
+              </div>
+              <div class="hint_toolbox__buttonbox--3QPq0">
+                <button class="common_toolbox__toolIconActive--FCzUO common_toolbox__toolIcon--1ZLHr" style="width: 60px; height: 60px;">
+                  <img src="images/design-v2/hint_paint.svg">
+                </button>
+                <button class="common_toolbox__toolIcon--1ZLHr" style="width: 60px; height: 60px;">
+                  <img src="images/design-v2/hint_clear.svg">
+                </button>
+              </div>
+            </div>
+            <div class="hint_workspace__paintbox--16PoA">
+              <div class="hint_workspace__picture--2n4K9 common_section__picture--NQoEN">
+                <div class="asketch__container--blxXs" style="cursor: url(&quot;images/design-v2/cursor/cursor_brush_s.cur&quot;), pointer;">
+                  <div class="asketch__fullscreenButton--1xuc6"><i class="fa fa-expand"></i></div>
+                  <div class="asketch__canvasBack--2kN0b">
+                    <canvas touch-action="none" style="height: 520px; width: 520px;" height="1040" width="1040"></canvas>
+                    <img id="classify_source_file" src=""/>
+                  </div>
+                </div>
+              </div>
+              <div class="common_section__footer--zaLSA upload-button">
+                <button class="common__normalButton--2nl55" style="width: 200px; height: 32px;">
+                  <img src="images/design-v2/upload.svg">
+                  <span>使用其他图片</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="line_section__hide--3S_m-">
+          <div class="common_section__header--5dJef">
+            <div class="common_section__modeSelector--5wKVd">
+              <button class="common_section__hintButtonActive--2m-Kb common_section__modeButtonActive--1oHGA common_toolbox__activedButton--285Ls common__normalButton--2nl55" style="width: 70px; height: 32px;">
+                <img src="images/design-v2/brush_white.svg">
+                <span>分类</span>
+              </button>
+              <button class="common_section__lineButton--1HVZz common_section__modeButton--3_uuQ common__normalButton--2nl55 button_not_finish" style="width: 90px; height: 32px;" >
+                <img src="images/design-v2/pencil.svg">
+                <span>检测</span>
+              </button>
+            </div>
+            <button class="line_section__normalButton--1nDWu common__normalButton--2nl55" style="width: 113px; height: 32px;">
+              <img src="images/design-v2/pencil.svg">
+              <span>ペン入れ</span>
+            </button>
+          </div>
+          <div class="line_workspace__container--L4fcI">
+            <div class="line_toolbox__toolbox--10x6T">
+              <div class="common_toolbox__undoBox--1xCez">
+                <button class="common_toolbox__toolIconDisable--13YCr common_toolbox__toolIcon--1ZLHr" style="width: 28px; height: 28px;">
+                  <img src="images/design-v2/hint_undo.svg">
+                </button>
+                <button class="common_toolbox__toolIconDisable--13YCr common_toolbox__toolIcon--1ZLHr" style="width: 28px; height: 28px;">
+                  <img src="images/design-v2/hint_redo.svg">
+                </button>
+              </div>
+              <div class="line_toolbox__colorPallet--1iCeH">
+                <div style="width: 60px; display: flex; flex-wrap: wrap; margin-right: -3px; margin-bottom: -3px;" class="circle-picker "></div></div>
+                <div class="line_toolbox__buttonbox--1ogzQ">
+                  <button class="common_toolbox__toolIconActive--FCzUO common_toolbox__toolIcon--1ZLHr" style="width: 60px; height: 60px;">
+                    <img src="images/design-v2/line_pencil_w1.svg">
+                  </button>
+                  <button class="common_toolbox__toolIcon--1ZLHr" style="width: 60px; height: 60px;">
+                    <img src="images/design-v2/line_pencil_w2.svg">
+                  </button>
+                  <button class="common_toolbox__toolIcon--1ZLHr" style="width: 60px; height: 60px;">
+                    <img src="images/design-v2/line_pencil_w3.svg">
+                  </button>
+                  <button class="common_toolbox__toolIcon--1ZLHr" style="width: 60px; height: 60px;">
+                    <img src="images/design-v2/hint_eraser.svg">
+                  </button>
+                </div>
+              </div>
+              <div class="line_workspace__paintbox--3pjYI">
+                <div class="line_workspace__picture--3smYU common_section__picture--NQoEN" id="lineWorkspace">
+                  <div class="painting_status__hide--13ATn"></div>
+                  <div class="asketch__container--blxXs" style="cursor: url(&quot;images/design-v2/cursor/cursor_pencil_s.cur&quot;), pointer;">
+                    <div class="asketch__fullscreenButton--1xuc6">
+                      <i class="fa fa-expand"></i>
+                    </div>
+                    <div class="asketch__canvasBack--2kN0b">
+                      <canvas touch-action="none"></canvas>
+                      <img crossorigin="anonymous">
+                    </div>
+                  </div>
+                </div>
+                <div class="common_section__footer--zaLSA upload-button">
+                  <button class="common__normalButton--2nl55" style="width: 200px; height: 32px;">
+                    <img src="images/design-v2/upload.svg">
+                    <span>使用其他图片</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="painted_section__container--AVGel common_section__containerBase--qmkKj">
+            <div class="painted_section__hide--2SEDx"></div>
+            <div class="painted_section__header--a2xz3 common_section__header--5dJef">
+              <div class="painted_section__styleSelector--1zS-F">
+                <label class="paint_mode_label__paintLabel--2QI-z paint_mode_label_not_finish">
+                  <img src="images/design-v2/lnf.png">
+                  <input type="radio" value="lnf">
+                  <span>LNF</span>
+                </label>
+                <label class="paint_mode_label__paintLabel--2QI-z">
+                  <img src="images/design-v2/mv2.png">
+                  <input type="radio" value="mv2">
+                  <span>MV2</span>
+                </label>
+                <label class="paint_mode_label__paintLabel--2QI-z paint_mode_label_not_finish">
+                  <img src="images/design-v2/irv2.png">
+                  <input type="radio" value="irv2">
+                  <span>IRV2</span>
+                </label>
+                <!-- <label class="paint_mode_label__paintLabel--2QI-z paint_mode_label_not_finish">
+                  <img src="images/design-v2/rv2.png">
+                  <input type="radio" value="rv2">
+                  <span>RV2</span>
+                </label> -->
+                <label class="paint_mode_label__paintLabelActive--3VBBo paint_mode_label__paintLabel--2QI-z">
+                  <img src="images/design-v2/iv3-active.png">
+                  <input type="radio" value="iv3">
+                  <span>IV3</span>
+                </label>
+              </div>
+              <div class="painted_section__previewButtonContainer--1ix4-">
+                <label>
+                  <input type="checkbox" value="on">
+                  <span>自动上传</span>
+                </label>
+              </div>
+              <button id="classify_start" class="common__normalButton--2nl55" style="width: 86px; height: 32px;">
+                <img src="images/design-v2/brush.svg">
+                <span>启动</span>
+              </button>
+            </div>
+            <div class="painted_section__pictureDraft--V-q7w common_section__picture--NQoEN">
+              <div id="workstate" class="painting_status__statusBox--1c3il painting_status__statusBox_vanish">
+                <p>UPLOADING</p>
+              </div>
+              <div id="classify_chart"></div>
+              <canvas style="display: none;" class="preview_canvas__previewCanvas--TTFYw"></canvas>
+              <!-- <img id="classify_answer_file"/> -->
+            </div>
+            <div></div>
+        </div>
+        </div>
+        <footer id="footer">
+          <div class="container">
+            <div class="staff">
+              <div class="collaborated-by">
+                <h3>协助</h3>
+                <div class="horizontal-box">
+                  <p>
+                    <a href="http://image-net.org/" target="_blank">
+                      <img src="images/design-v2/ImageNet_logo.png" height="16" >
+                    </a>
+                  </p>
+                  <p>
+                    <a href="https://www.tensorflow.org/" target="_blank">
+                      <img src="images/design-v2/Tensorflow_logo.png" height="18" width="18"> Tensorflow
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="tool">
+              <div class="logo">
+                <a href="index_ja.html">
+                  <img src="images/design-v2/logo_white.svg" width="138" height="32">
+                </a>
+              </div>
+              <div class="bottom-nav">
+                <span class="handle upload-button">
+                  <img src="images/design-v2/upload_white.svg">
+                  上传图片
+                </span>
+                <span class="handle preset-button">
+                  <img src="images/design-v2/brush_white.svg">
+                  使用样例
+                </span>
+                <a class="handle" href="/webui/howto/">
+                  <img src="images/design-v2/info_q_white.svg">
+                  使用方法
+                </a>
+              </div>
+              <div class="links">
+                <div>
+                  <a href="/webui/terms/" target="_blank">使用规则</a>
+                </div>
+                <div>
+                  <a href="/webui/privacy/" target="_blank">隐私政策</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </footer>
+
+<script>
+  if (location.hostname.indexOf('.preferred.tech') > -1) {
+    // Sentry
+    Raven.config('https://9ea58920e9224cd4803001d7dd7c7c08@sentry.io/235845').install();
+
+    // Google Analytics
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-91036510-1', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+    <div class="pixivsketchdraw" id="pxvsketch"></div>
+
+    <!-- Twitter universal website tag code -->
+    <script>
+      !function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
+        },s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='//static.ads-twitter.com/uwt.js',
+        a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
+      // Insert Twitter Pixel ID and Standard Event data below
+      twq('init','nygl0');
+      twq('track','PageView');
+    </script>
+    <!-- End Twitter universal website tag code -->
+
+  
+
+<iframe id="rufous-sandbox" scrolling="no" allowtransparency="true" allowfullscreen="true" style="position: absolute; visibility: hidden; display: none; width: 0px; height: 0px; padding: 0px; border: medium none;" title="Twitter analytics iframe" frameborder="0"></iframe></body></html>

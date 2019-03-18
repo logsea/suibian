@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="17px" height="15px" viewBox="0 0 17 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>icon18</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="working" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icon18" transform="translate(-1.000000, -1.000000)" stroke="#F51C73">
+            <path d="M15,12 L15,14 L15,14 C15,14.5522847 14.5522847,15 14,15 L3,15 L3,15 C2.44771525,15 2,14.5522847 2,14 L2,6 L2,6 C2,5.44771525 2.44771525,5 3,5 L7,5" id="Rectangle-2" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M11,0.781024968 L11.3841106,0.3200922 L10.6158894,0.3200922 L11,0.781024968 Z M14.9324792,5.5 L15.6158894,6.3200922 L16,5.5 L14.9324792,5.5 Z M14.8560722,12.2257523 C15.0857934,12.5750144 15.3322088,12.9309466 15.5952725,13.293591 L16.0882702,12.5078533 C15.6560808,12.4303369 15.2453926,12.3363354 14.8560722,12.2257523 Z M7.06752081,5.5 L6,5.5 L6.38411064,6.3200922 L7.06752081,5.5 Z M7.06752081,5.5 L11,0.781024968 L14.9324792,5.5 L12.5,5.5 L12.5,6 C12.5,7.77424829 13.2902022,9.84504414 14.8560722,12.2257523 C11.6103526,11.3038332 9.8497767,9.22942751 9.49714004,5.94659796 L9.44916715,5.5 L7.06752081,5.5 Z" id="Rectangle-4" transform="translate(11.000000, 6.500000) rotate(-270.000000) translate(-11.000000, -6.500000) "></path>
+        </g>
+    </g>
+</svg>

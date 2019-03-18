@@ -1,0 +1,346 @@
+@import url(https://fonts.googleapis.com/css?family=Meddon);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300);
+@import url(http://weloveiconfonts.com/api/?family=entypo);
+@import url(https://fonts.googleapis.com/earlyaccess/roundedmplus1c.css);
+
+/* entypo */
+[class*="entypo-"]:before {
+  font-family: 'entypo', sans-serif;
+}
+
+#howto-navi { 
+  width: 100%;
+  height: 45px;
+  background-color: white;
+  padding: 0;
+  font-family: 'Rounded Mplus 1c';
+}
+
+
+.navbar-brand {
+    float: left;
+    padding-left: 25px;
+    font-weight: 400; 
+    color: #e6567a;
+}
+
+.navbar-brand img {
+    float: left; 
+    margin: 0 10px; 
+    width: 19px;
+}
+
+.fixed{position: fixed;
+    left:0;
+    top:0;
+    z-index:1000;}
+
+
+img.logo {
+    padding: 0 7px;
+}
+
+body, ul, li {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: white;
+}
+
+nav ul {
+  position: relative;
+  height: 45px;
+  float: right;
+  padding-right: 20px;
+}
+
+nav ul li {
+    position: relative;
+  height: 45px;
+  display: inline-block;
+}
+
+header nav ul li a {
+  position: relative;
+  height: 42px;
+  display: block;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: black;
+  font-size: 15px;
+  line-height: 280%;
+  text-decoration: none;
+  -webkit-transition: color 1s ease;
+  -moz-transition: color 1s ease;
+  -o-transition: color 1s ease;
+  transition: color 1s ease;
+
+}
+
+header nav ul li a:hover{
+  color: #e6567a;
+    text-decoration: none;
+}
+
+header nav ul li a.active{
+  height: 45px;
+    border-top: 2px solid #e6567a;
+  border-bottom: 2px solid #e6567a;
+    color: #e6567a;
+    text-decoration: none;
+}
+
+header nav ul li a.link-1 { background-color: white; text-decoration: none;}
+header nav ul li a.link-2 { background-color: white; text-decoration: none;}
+header nav ul li a.link-3 { background-color: white; text-decoration: none;}
+
+
+section {
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  background-color: white;
+  padding: 0 25px 30px;
+}
+
+section:last-child {
+    margin-bottom: 120px;
+}
+
+section h2 {
+  font-weight: 500;
+  font-size: 30px;
+  margin-top: 1%;
+  margin-bottom: 2%;
+  padding: 0 0 4px;
+  color: #e6567a;
+line-height: 100%;
+    font-family: 'Rounded Mplus 1c';
+    border-bottom: solid 1px darkgray;;
+}
+
+section p {
+  color: black;
+  font-weight: 300;
+  font-size: 1em; 
+}
+
+.pill {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: skyblue;
+  border: 0;  
+  margin-top: 35px;
+  margin-bottom: 45px;
+  margin-left: 0px
+}
+
+.try-now {
+        position: fixed;
+        z-index: 9900;
+        bottom: 15px; 
+        right: 20px;
+        font-family: 'Rounded Mplus 1c';
+        padding: 0 7px 3px 11px;
+        margin: 0;
+    border-radius: 22px 0 0 22px;
+    background: white;
+    border-style: solid; 
+    border-top-color: #e6567a;
+    border-left-color: #e6567a;
+    border-bottom-color: #e6567a;
+    border-right-color: white;
+    border-width: thin;
+    }
+
+video.instruction {
+    width: 100%;
+    display: inline-block;
+    box-shadow: 0px 0px 15px -5px rgba(0, 0, 0, 0.8);
+    margin: 15px 0 25px;
+}
+
+img.instruction {
+    display: inline-block;
+    box-shadow: 0px 0px 15px -5px rgba(0, 0, 0, 0.8);
+    margin-bottom: 5px;
+    margin-right: 0.8%;
+    margin-left: 0.8%;
+}
+
+.instru-p {
+    width: 100%; 
+    text-align: center;
+    margin: 15px 0;
+}
+
+div.instruction1 ul li:nth-child(2) p img {
+    width: 30%
+}
+
+div.instruction1 ul li:nth-child(3) p img {
+    width: 100%
+}
+
+div.instruction2 ul li:nth-child(1) p img {
+    width: 100%;
+}
+
+div.instruction2 ul li:nth-child(2) p img {
+    width: 47%;
+}
+
+div.instruction3 ul li:first-child div img.instruction {
+    width: 152.4px;
+    height: 145.8px;
+    margin: 10px 0 0 0;
+}
+
+div.tips {
+    margin: 10px 0 0 20px;
+    color: gray;
+    line-height: 180%;
+    display: flex;        
+　   flex-direction: row;
+    font-size: 14px;
+}
+
+div.tips-icon {
+    padding: 1px 8px;
+    vertical-align: middle;
+    border: solid 1px #ff99bb;
+    margin-right: 8px;
+    border-radius: 5px;
+    color: #ff99bb;
+    font-weight: 500;
+    font-family: 'Rounded Mplus 1c';
+    
+}
+
+ul.instru-ul li {
+  padding: 15px 0 0;
+  list-style-type: none!important;
+  font-size: 20px;
+  color: #e6567a;
+  font-family: 'Rounded Mplus 1c';
+}
+
+.instruction-text {
+    margin-left: 7px;
+    font-size: 16px;
+    font-weight: 400;
+    color: dimgray;
+}
+
+@media screen and (min-width: 800px) {
+    body{
+      width:100%; 
+      text-align:center; 
+    }
+    #wrap{ 
+      width: 800px;	    
+      margin: 0 auto;    
+      text-align:left;  
+    }
+    section {
+        width: 800px;
+        box-sizing: border-box;
+        padding: 0 20px;
+        overflow: hidden;
+    }
+
+    .try-now {
+        bottom: 35px; 
+        right: 30px;
+        padding: 3px 15px 6px 13px;
+        border-radius: 22px;
+        border-style: solid; 
+        border-color: #e6567a;
+    } 
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .navbar-brand {
+        padding-left: 35%;
+        margin-left: -225px;
+    }
+    .second-nav {
+        padding-right: 35%;
+        margin-right: -265px;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .navbar-brand {
+        padding-left: 35%;
+        margin-left: -255px;
+    }
+    .second-nav {
+        padding-right: 35%;
+        margin-right: -355px;
+    }
+    .try-now {
+        right: 35%;
+        margin-right: -335px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #howto-navi { 
+      height: 40px;
+    }
+
+    .navbar-brand {
+        line-height: 70%;
+        padding-left: 15px;
+    }
+    
+    .navbar-brand img {
+        margin: -4px 5px 0; 
+    }
+    
+    nav ul {
+      height: 40px;
+        padding-right: 15px;
+    }
+
+    nav ul li {
+      height: 40px;
+    }
+
+    header nav ul li a {
+      height: 37px;
+      padding-left: 6px;
+      padding-right: 7px;
+      line-height: 220%;
+    }
+
+    header nav ul li a.active{
+      height: 40px;
+    }
+    
+    img.instruction {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 15px;
+        width: 100%;
+    }
+    
+    div.instruction1 ul li:nth-child(2) p img {
+        width: 60%
+    }
+    
+    div.instruction2 ul li:nth-child(2) p img {
+        width: 65%;
+    }
+    
+    div.instruction3 ul li:first-child div img.instruction {
+        width: 30%;
+        height: 30%;
+        margin: 10px 0 0 0;
+    }
+}

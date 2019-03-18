@@ -1,0 +1,243 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#c90000">
+    <meta name="apple-mobile-web-app-title" content="PaintsChainer">
+    <meta name="application-name" content="PaintsChainer">
+    <link rel="apple-touch-icon" sizes="57x57" href="/images/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/images/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/images/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/images/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/images/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/images/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/images/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/images/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/images/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/images/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/images/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <title>Cloth Classifier -衣物自动识别-</title>
+    <!-- Canvas toBlob polyfill -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/javascript-canvas-to-blob/3.8.0/js/canvas-to-blob.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <!-- jQuery Cookie -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <!-- jQuery UI -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <!-- minicolor -->
+    <link rel="stylesheet" href="//paintschainer.preferred.tech/css/lib/jquery.minicolors.css?v=1">
+    <script src="//paintschainer.preferred.tech/js/lib/jquery.minicolors.min.js?v=1"></script>
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- font-awesome -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <!-- Mobile detect -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/mobile-detect/1.3.6/mobile-detect.min.js"></script>
+    <!-- main -->
+    <link rel="stylesheet" href="css/paints_chainer.css?v=8">
+    <script type="text/javascript">
+      window.i18n_locales = {}
+    </script>
+    <script src="//paintschainer.preferred.tech/js/lib/inflate.min.js"></script>
+    <script src="//paintschainer.preferred.tech/js/lib/webdnn.js"></script>
+    <!-- <script src="//paintschainer.preferred.tech/js/paints_chainer.js?v=1508300131"></script> -->
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.2/jquery.scrollTo.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-localScroll/2.0.0/jquery.localScroll.min.js"></script>
+<link type="text/css" rel="stylesheet" href="css/index.css" />
+<link rel="stylesheet" href="css/howto-style.css">
+<script>
+!function(e){function t(u){if(n[u])return n[u].exports;var r=n[u]={i:u,l:!1,exports:{}};return e[u].call(r.exports,r,r.exports,t),r.l=!0,r.exports}var n={};t.m=e,t.c=n,t.d=function(e,n,u){t.o(e,n)||Object.defineProperty(e,n,{configurable:!1,enumerable:!0,get:u})},t.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(n,"a",n),n},t.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},t.p="",t(t.s=9)}({0:function(e,t){e.exports=jQuery},9:function(e,t,n){"use strict";var u=n(0),r=function(e){return e&&e.__esModule?e:{default:e}}(u);(0,r.default)(function(){(0,r.default)(".menu").localScroll({axis:"xy",queue:!1,hash:!0,duration:1e3,stop:!0,easing:"easeInOutQuad"}),(0,r.default)(function(){(0,r.default)().click()})})}});
+</script>
+
+  </head>
+  <body>
+    
+<nav id="top-nav" class="navbar navbar-default navbar-static-top">
+  <div class="nav-container container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+      </button>
+      <div class="logo">
+        <a href="/?top=1">
+          <img src="images/design-v2/logo.svg" width="138" height="32" />
+        </a>
+      </div>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+          <a class="handle" href="/?upload=true">
+            <img src="images/design-v2/upload.svg" />
+            选择线稿
+          </a>
+        </li>
+        <li>
+          <a class="handle" href="/?try=true">
+            <img src="images/design-v2/brush.svg">
+            利用范例进行试用
+          </a>
+        </li>
+        <li>
+          <a class="handle" href="/webui/howto/">
+            <img src="images/design-v2/info-q.svg" />
+            如何使用
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    
+  <div class="try-now">
+    <a href="/" style="text-decoration: none; color: #e6567a"><span class="entypo-paper-plane" style="font-size: 25px"></span><span style="font-size: 18px; font-weight: 500"> TRY</span></a>
+  </div>
+  <header id="howto-navi">
+    <div class="navbar-brand"><img src="images/design-v2/info-q.svg">使用方法</div>
+    <nav role='navigation' class="second-nav">
+    <ul>
+      <li><a class="link-1 entypo-palette active" href="#home">自动上色</a></li>
+      <li><a class="link-2 entypo-pencil" href="#clients">自动描线</a></li>
+    </ul>
+    </nav>
+  </header>
+  <div id="wrap">
+    <section id="home">
+      <div class="instruction1">
+        <h2><span style="font-size: 50%; color: darkgray; font-weight: 400">Howto</span><br>自动上色</h2>
+        <ul class="instru-ul">
+          <li class="entypo-play"><span class="instruction-text">选择线稿后会立即自动上色</span></li>
+          <li class="entypo-play"><span class="instruction-text">有3种上色风格可选择：蒲公英，皋月杜鹃，美人蕉</span>
+            <p class="instru-p">
+              <img class="instruction" src="//paintschainer-cdn.preferred.tech/howto/image/img-color-1.jpg">
+              <img class="instruction" src="//paintschainer-cdn.preferred.tech/howto/image/img-color-2.jpg">
+              <img class="instruction" src="//paintschainer-cdn.preferred.tech/howto/image/img-color-3.jpg">
+            </p>
+          </li>
+          <li class="entypo-play"><span class="instruction-text">
+            可在左侧面板上添加提示颜色以进行颜色的指定。</span>
+            <div class="tips"><div class="tips-icon">TIP</div><div style="display: inline-block; float: left">若开启自动预览模式(<img src="//paintschainer-cdn.preferred.tech/howto/image/img-color-5.jpg" style="margin: 0 2px 2px">)每次添加提示颜色后上色结果都会自动更新。</div></div>
+            <p class="instru-p">
+              <img class="instruction" src="//paintschainer-cdn.preferred.tech/howto/image/img-color-4.jpg">
+            </p>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section id="clients">
+    <div class="instruction2">
+      <h2><span style="font-size: 50%; color: darkgray; font-weight: 400">Howto</span><br>自动描线</h2>
+        <ul class="instru-ul">
+          <li class="entypo-play"><span class="instruction-text">从上色模式切换到线稿编辑模式。</span>
+            <p class="instru-p">
+              <img class="instruction" src="//paintschainer-cdn.preferred.tech/howto/image/img-line-1.jpg">
+            </p>
+          </li>
+          <li class="entypo-play"><span class="instruction-text">有2中描线风格可选择：熊猫，北极熊</span>
+            <p class="instru-p">
+              <img class="instruction" src="//paintschainer-cdn.preferred.tech/howto/image/img-line-2.jpg">
+              <img class="instruction" src="//paintschainer-cdn.preferred.tech/howto/image/img-line-3.jpg">
+            </p>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </div>
+  <div class="pixivsketchdraw" id="pxvsketch"></div>
+
+    
+<footer id="footer">
+  <div class="container">
+    <div class="staff">
+      <div class="provided-by">
+        <h3>提供</h3>
+        <a href="https://www.preferred-networks.jp/" target="_blank">
+          <img src="images/design-v2/PFN_logo.png" width="14"> Preferred Networks
+        </a>
+      </div>
+      <div class="collaborated-by">
+        <h3>协助</h3>
+        <div class="horizontal-box">
+          <p>
+            <a href="https://sketch.pixiv.net/" target="_blank">
+              <img src="images/design-v2/pixivsketch-logo.png" height="16" width="16"> pixiv Sketch
+            </a>
+	  </p>
+          <p>
+            <a href="https://chainer.org/" target="_blank">
+              <img src="images/design-v2/chainer-64.png" height="18" width="18"> Chainer
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="tool">
+      <div class="logo">
+        <a href="/?top=1">
+          <img src="images/design-v2/logo_white.svg" width="138" height="32" />
+        </a>
+      </div>
+      <div class="bottom-nav">
+        <a href="/">
+          <img src="images/design-v2/upload_white.svg" />
+          选择线稿
+        </a>
+        <a class="handle" href="/webui/howto/">
+          <img src="images/design-v2/info_q_white.svg" />
+          如何使用
+        </a>
+      </div>
+      <div class="links">
+        <div>
+          <a href="/webui/terms/" target="_blank">利用规则</a>
+        </div>
+        <div>
+          <a href="/webui/privacy/" target="_blank">隐私权政策</a>
+        </div>
+        <div class="social">
+          <a href="https://github.com/pfnet/PaintsChainer" target="_blank">
+            <i class="fa fa-github-alt"></i>
+          </a>
+          <a href="https://twitter.com/paintschainer" target="_blank">
+            <i class="fa fa-twitter"></i>
+          </a>
+          <a href="https://facebook.com/PaintsChainer" target="_blank">
+            <i class="fa fa-facebook"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+    <script>
+      if (location.hostname === "paintschainer.preferred.tech") {
+        (function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,"script","https://www.google-analytics.com/analytics.js","ga");
+        ga("create", "UA-91036510-1", "auto");
+        ga("send", "pageview");
+      }
+    </script>
+    
+<script src="//paintschainer-cdn.preferred.tech/js/howto-js.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#c90000">
+<meta name="apple-mobile-web-app-title" content="PaintsChainer">
+<meta name="application-name" content="PaintsChainer">
+<link rel="apple-touch-icon" sizes="57x57" href="/images/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/images/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/images/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/images/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/images/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/images/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/images/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/images/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/images/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/images/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/images/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+<link rel="alternate" hreflang="zh" href="/ClothClassify.html">
+<title>Cloth Classifier -衣物自动识别-</title>
+<!-- Canvas toBlob polyfill -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/javascript-canvas-to-blob/3.8.0/js/canvas-to-blob.min.js"></script>
+<!-- jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<!-- jQuery Cookie -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<!-- jQuery UI -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<!-- bootstrap -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- font-awesome -->
+<link rel="stylesheet" href="css/font-awesome/css/font-awesome.css">
+<!-- Mobile detect -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/mobile-detect/1.3.6/mobile-detect.min.js"></script>
+<!-- main -->
+<link rel="stylesheet" href="css/paints_chainer.css?v=1540873098">
+<script src="https://cdn.ravenjs.com/3.19.1/raven.min.js" crossorigin="anonymous"></script>
+<script type="text/javascript">
+  window.i18n_locales = {"warn_too_large_filesize":"图片文件太大。","tanpopo":"たんぽぽ","satsuki":"さつき","incv3":"Inception-v3","panda":"パンダ","shirokuma":"しろくま","paint":"上色","share":"分享","download":"下载","upload_other":"上传其他图像","edit_color":"上色","edit_line":"编辑线条","line_simplify":"上线","auto_paint":"自动运行","preset_image_title":"pixiv Sketch・Pawoo「AI三姉妹イラスト企画」大賞作品","preset_image_title_2":"pixiv Sketch・Pawoo「絵愛ちえなちゃんイラスト企画」大賞作品","preset_image_title_3":"「PaintsChainer1周年記念イラストコンテスト」最優秀賞作品","preset_image_1":"提供：おがたさん","preset_image_2":"提供：ももさん","preset_image_3":"提供：ももさん","preset_image_4":"提供：ももさん","preset_image_5":"提供：でろりさん","preset_image_6":"提供：いもむしさん"}
+</script>
+<!-- <script src="js/paints_chainer.js?v=1540873098"></script> -->
+<script src="js/c-c.js"></script>
+
+    <link rel="stylesheet" href="css/index.css?v=1540873098">
+  </head>
+  <body id="colorize-page">
+    <nav id="top-nav" class="navbar navbar-default">
+  <div class="nav-container container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+      </button>
+      <div class="logo">
+        <a href="ClothClassify.html">
+          <img src="images/design-v2/logo.png" width="138" height="32" />
+        </a>
+      </div>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+          <span class="handle upload-button">
+            <img src="images/design-v2/upload.svg" />
+            上传图片
+          </span>
+        </li>
+        <li>
+          <span class="handle preset-button">
+            <img src="images/design-v2/brush.svg" />
+            使用样例
+          </span>
+        </li>
+        <li>
+          <a class="handle" href="/howto">
+            <img src="images/design-v2/info-q.svg" />
+            使用方法
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+    <div id="main-container">
+      <div id="app" class="app-init"></div>
+
+      <div id="tagline">
+        <div class="photo-description">
+          <a href="https://paintschainer-pr.preferred.tech/chiena-news/" target="_blank">
+          </a>
+        </div>
+        <div id="cover-image">
+          <div id="back-photo"></div>
+        </div>
+        <div id="cover-ui">
+          <div class="main-tagline">用AI为衣物图片</br>自动分类！</div>
+          <div class="hover-button upload-button">
+            <img src="images/design-v2/upload_white.svg" width="22" height="20" />
+            上传你的图片
+          </div>
+          <div class="hover-button preset-button">
+            <img src="images/design-v2/pencil_box_white.svg" />
+            用样例来分类
+          </div>
+        </div>
+      </div>
+
+      <div id="pr-section">
+        <div class="headline">
+          <div class="point">
+            <a href="/howto">
+              <div id="pr-section-point1">
+                <img src="images/design-v2/index/pr_line_before.jpg" />
+              </div>
+              <div class="caption">
+                <h2>判断图片中衣物种类</h2>
+              </div>
+            </a>
+          </div>
+          <div class="point">
+            <a href="/howto">
+              <div id="pr-section-point2">
+                <img src="images/design-v2/index/pr_hint_before.jpg" />
+              </div>
+              <div class="caption">
+                <h2>数种转移学习的模型任选</h2>
+              </div>
+            </a>
+          </div>
+          <div class="point">
+            <a href="/howto">
+              <div id="pr-section-point3">
+                <img src="images/design-v2/index/index_pr_spot3.jpg" />
+              </div>
+              <div class="caption">
+                <h2>多种模型比较效果</h2>
+              </div>
+            </a>
+          </div>
+          <div class="point">
+            <a href="https://sketch.pixiv.net" target="_blank">
+              <div id="pr-section-point4">
+                <img src="images/design-v2/index/index_pr_spot4.png" />
+              </div>
+              <div class="caption">
+                <h2>对图片批量判断</h2>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="more">
+          <div class="wire-button howto-button">
+            <a href="/howto">
+              <img src="images/design-v2/info-q.svg" width="22" height="22" />
+              了解详细的使用方式
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div id="info-section">
+        <div class="info-container">
+          <div id="news">
+            <h2>更新日志</h2>
+            <div class="box" style="width: 1140px;">
+              <p>
+                <a class="strong">Ver 0.1.0</a><br/>
+                网站总体布局完成。<br/>
+                准备将网站挂载到本地后端框架中，使用node.js + Express。<br/>
+                做好前后端交互，通过前端送去的图片由后端进行分类。
+              </p>
+              <p>
+                <a class="strong">Ver 0.1.1</a><br/>
+                将分类页面结果返回修改为图表的形式。<br/>
+                添加了MobileNet做为可选择的分类模型。<br/>
+                优化界面样式，添加了样例图片。<br/>
+                收集了更多的训练集。
+              </p>
+              <p>
+                少女祈祷中...
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <input type="file" id="upload-file" accept="image/*">
+    <img id="upload-image-file"></img>
+
+  <footer id="footer">
+  <div class="container">
+    <div class="staff">
+      <div class="collaborated-by">
+        <h3>协助</h3>
+        <div class="horizontal-box">
+          <p>
+            <a href="http://image-net.org/" target="_blank">
+              <img src="images/design-v2/ImageNet_logo.png" height="16" >
+	          </a>
+	        </p>
+          <p>
+            <a href="https://www.tensorflow.org/" target="_blank">
+              <img src="images/design-v2/Tensorflow_logo.png" height="18" width="18"> Tensorflow
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="tool">
+      <div class="logo">
+        <a href="ClothClassify.html">
+          <img src="images/design-v2/logo_white.svg" width="138" height="32" />
+        </a>
+      </div>
+      <div class="bottom-nav">
+        <span class="handle upload-button">
+          <img src="images/design-v2/upload_white.svg" />
+          上传图片
+        </span>
+        <span class="handle preset-button">
+          <img src="images/design-v2/brush_white.svg" />
+          使用样例
+        </span>
+        <a class="handle" href="/howto">
+          <img src="images/design-v2/info_q_white.svg" />
+          使用方法
+        </a>
+      </div>
+      <div class="links">
+        <div>
+          <a href="/webui/terms/" target="_blank">使用规则</a>
+        </div>
+        <div>
+          <a href="/webui/privacy/" target="_blank">隐私政策</a>
+        </div>  
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<div id="example_image_box">
+  <!-- <button id="example_image_box_close">x</button> -->
+  <div class='example_image_box_close'><i class="fa fa-times" aria-hidden="true"></i></div>
+  <div class="example_image_cell">
+    <div><label>样例-衬衫</label></div>
+    <img src="images/example/shirt-1.jpg">
+  </div>
+  <div class="example_image_cell">
+    <div><label>样例-礼服</label></div>
+    <img src="images/example/gown-1.JPEG">
+  </div>
+</div>
+
+<script>
+  if (location.hostname.indexOf('.preferred.tech') > -1) {
+    // Sentry
+    Raven.config('https://9ea58920e9224cd4803001d7dd7c7c08@sentry.io/235845').install();
+
+    // Google Analytics
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-91036510-1', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+    <div class="pixivsketchdraw" id="pxvsketch"></div>
+
+    <!-- Twitter universal website tag code -->
+    <script>
+      !function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
+        },s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='//static.ads-twitter.com/uwt.js',
+        a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
+      // Insert Twitter Pixel ID and Standard Event data below
+      twq('init','nygl0');
+      twq('track','PageView');
+    </script>
+    <!-- End Twitter universal website tag code -->
+
+  </body>
+</html>
